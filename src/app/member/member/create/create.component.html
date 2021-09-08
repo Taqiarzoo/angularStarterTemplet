@@ -1,0 +1,148 @@
+<form [formGroup]="form">
+<div class="card ">
+    
+    <div class="card-body">
+        <h4>{{'Add Member'}}</h4>
+        <hr>
+        <div class="row pt-3">
+            
+            <div class="col-md-3" >
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio1" value="Member"  [formControlName]="'member'" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio1">Member</label>
+                  </div>
+                  
+                </div>
+            <div class="col-md-3">
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio2" value="NonMebmer" [formControlName]="'member'"  class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio2">None Member</label>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+
+            </div>
+            
+            <div class="form-group required col-md-3">
+                <label for="member_type" class="form-label">Member Type</label>
+                <!-- <input type="text" formControlName="weight_unit" class="form-control" id="inputWeightUnit"> -->
+                <select id="member_type" formControlName="member_type" class="form-select"
+                    [compareWith]="compareFn" >
+                    <option selected>Choose...</option>
+                    <!-- <option *ngFor="let unit of weightOptions" [ngValue]="unit">{{unit.name}}</option> -->
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label for="member_no" class="form-label">Member No</label>
+                <input type="text" formControlName="member_no" class="form-control">
+            </div>
+            <div class="col-md-6 d-none-md">
+
+            </div>
+            <div class="col-md-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" formControlName="name" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <label for="middle_name" class="form-label">Middle Name</label>
+                <input type="text" formControlName="middle_name" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <label for="last_name" class="form-label">Last Name</label>
+                <input type="text" formControlName="last_name" class="form-control">
+            </div>
+           <hr class="mt-3">
+                <div class="row">
+                    <div formArrayName="contact">
+                        <div class="from-group col-md-3" *ngFor="let contact of contact.controls let i=index" [formGroupName]="i">
+                            <label for="contact" class="form-label">contact</label>
+                            <div class="input-group">
+                                <input type="text" formControlName="contact" class="form-control">
+                                
+                                <button class="btn btn-outline-secondary" (click)="removeContact(i)"
+                                        type="button"><i class="far fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <hr class="mt-3">
+
+                <button type="button" class="btn btn-primary" (click)="addcontact()">Add</button>
+            <div class="card mt-4" formArrayName="address" style="width: 95%; max-width: 1000px; margin: 0 auto;">
+                <div class="card-body" *ngFor="let address of address.controls let i=index" [formGroupName]="i">
+                    <div class="row">
+                        <hr class="mt-2" *ngIf="i>0">
+                        <div class="col text-center" *ngIf="i<0">
+                            <h5>No address Avalible</h5>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="address_type" class="form-label">Member Type</label>
+                            <select id="address_type" formControlName="address_type" class="form-select"
+                            [compareWith]="compareFn" >
+                            <option selected>Choose...</option>
+                            <!-- <option *ngFor="let unit of weightOptions" [ngValue]="unit">{{unit.name}}</option> -->
+                        </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="address" class="form-label">Member No</label>
+                            <input type="text" formControlName="address" class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="area" class="form-label">Area</label>
+                            <input type="text" formControlName="area" class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="house_no" class="form-label">House No</label>
+                            <input type="text" formControlName="house_no" class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="galli_muhala" class="form-label">Gali/Muhala</label>
+                            <input type="text" formControlName="galli_muhala" class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="colony" class="form-label">Colony</label>
+                            <input type="text" formControlName="colony" class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="country" class="form-label">Country</label>
+                            <input type="text" formControlName="country" class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="state" class="form-label">state</label>
+                            <input type="text" formControlName="state" class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" formControlName="city" class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="pincode" class="form-label">Pincode</label>
+                            <input type="text" formControlName="pincode" class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="landmark" class="form-label">Landmark</label>
+                            <input type="text" formControlName="landmark" class="form-control">
+                        </div>
+                        <div class="col-md-3 text-end">
+                            <button class="btn btn-outline-secondary" style="margin-top: 28px;" (click)="removeAddress(i)"
+                                        type="button">{{i+1}} <i class="far fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-primary text-end"   (click)="addaddress()">Add</button>
+                </div>
+            </div>
+
+
+
+        
+
+   
+  </div>
+  </div>
+  </div>
+</form>
