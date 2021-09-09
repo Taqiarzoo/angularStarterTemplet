@@ -6,5 +6,7 @@ export const environment = {
     angular: 'Angular 12.1.3',
     bootstrap: 'Bootstrap 5.0.2',
     fontawesome: 'Font Awesome 5.15.3',
-  }
+    
+  },
+  apiUrl:"http://localhost.com:8080"
 };

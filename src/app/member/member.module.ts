@@ -4,6 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { MemberComponent } from './member/member.component';
 import { CreateComponent } from './member/create/create.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreateFamilyComponent } from './member/create-family/create-family.component';
+
+
 
 const routes: Routes = [
   {
@@ -27,6 +30,13 @@ const routes: Routes = [
         data:{
           title:'Members Add'
         }
+      },
+      {
+        path: 'family',
+        component: CreateFamilyComponent,
+        data:{
+          title:'Members Add'
+        }
       }
     
     ]
@@ -36,7 +46,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     MemberComponent,
-    CreateComponent
+    CreateComponent,
+    CreateFamilyComponent,
   ],
   imports: [
     CommonModule,

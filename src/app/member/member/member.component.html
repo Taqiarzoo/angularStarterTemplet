@@ -1,1 +1,154 @@
-<p>member works!</p>
+<div class=".container">
+ 
+ 
+    <div class="row">
+      <div class="col">
+        <div class="card mt-5 mb-5"  *ngIf="root">
+          
+          <div class="card-body ">
+              <form [formGroup]="form1">
+            <div class="row" >
+                <div class="row">
+         
+                    <div class="col-sm-5" >
+                      <h4>User List</h4>
+                    </div>
+                    <button style="margin-top: 36px;" *ngIf="enableCreateFamily" type="button" (click)='onCreateMember()' class="btn btn-secondary">Add Member</button>
+                    
+                    <hr>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="area" class="form-label">area
+                    </label>
+                    <div class="input-group mb-3">
+                      <select class="form-control" formControlName="area">
+                        <option>Area</option>
+                      </select>
+                            
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="gali_mohalla" class="form-label">Gali / Mohalla
+                    </label>
+                    <div class="input-group mb-3">
+                      <select class="form-control" formControlName="gali_mohalla">
+                        <option>Gali / Mohalla
+                        </option>
+                      </select>
+                            
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="house_no" class="form-label">House No.
+                    </label>
+                    <div class="input-group mb-3">
+                      <select class="form-control" formControlName="house_no">
+                        <option>House No.
+                        </option>
+                      </select>
+                            
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="last_name" class="form-label">Last Name
+                    </label>
+                    <div class="input-group mb-3">
+                        <input id="last_name" aria-label="Sub Total"
+                            aria-describedby="basic-addon2" class="form-control"
+                            formControlName="last_name" type="text" >
+                         
+                    </div>
+                </div>
+                <div class="col pull-right text-end">
+                    <button style="margin-top: 36px;" type="button" class="btn btn-secondary"><i class="fas fa-filter"></i></button>
+                    <button style="margin-top: 36px;" *ngIf="enableCreateFamily" type="button" (click)='onCreateFamily()' class="btn btn-secondary">Create Family</button>
+
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="col pull-right text-end d-none-md">
+                </div>
+                <div class="col-md-6" >
+                        
+                            <div class="form-group col-md-3">
+                                <label for="search" class="form-label">Search</label>
+                                <div class="input-group mb-3">
+                                    <input id="last_name" aria-label="Sub Total"
+                                        aria-describedby="basic-addon2" class="form-control"
+                                        formControlName="search" type="text" >
+                                    
+                                </div>
+                            </div>
+                        
+              </div>
+            </div>
+        </form>
+    
+    <div class="row">            
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">S. NO</th>
+                    <th scope="col">MEMBER NO</th>
+                    <th scope="col">FIRST NAME</th>
+                    <th scope="col">LAST NAME </th>
+                    <th scope="col">
+                        MIDDLE NAME
+                    </th>
+                    <th scope="col">
+                        FATHER/HUSBAND NAME
+                    </th>
+                    <th scope="col">
+                        HOUSE NO
+                    </th>
+                    <th scope="col">
+                        GALI
+                    </th>
+                    <th scope="col">
+                        AREA
+                    </th>
+                    <th scope="col">
+                        CITY
+                    </th>
+                    <th scope="col">
+                        ACTION
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of memberList let j=index" #ref>
+                        <th scope="row">{{j}}</th>
+                        <td>{{data.first_name}}</td>
+                        <td>{{data.middle_name}}</td>
+                        <td>{{data.last_name}}</td>
+                        <td>{{data.relative}}</td>
+                        <td>{{data.house_no}}</td>
+                        <td>{{data.gali_mohalla}}</td>
+                        <td>{{data.house_no}}</td>
+                        <td>{{data.area}}</td>
+                        <td>{{data.city}}</td>
+                        <td><div class="form-check">
+                            <input class="form-check-input" #check type="checkbox" value="" id="flexCheckDefault" (change)="SelectToFamily(data,j,$event,ref)">
+                          </div>
+                        
+                        </td>
+                     
+
+                      </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+      </div>
+
+      
+
+    <ng-template *ngIf="family">
+        <div class="card-body">
+            <app-create-family [data]="dataToPass" (cancel)="cancelFromChild($event)"></app-create-family>
+        </div>
+    </ng-template>
+    </div>
+  </div>
+  

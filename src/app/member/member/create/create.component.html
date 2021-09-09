@@ -4,7 +4,7 @@
     <div class="card-body">
         <h4>{{'Add Member'}}</h4>
         <hr>
-        <div class="row pt-3">
+        <div class="row pt-3" [formGroup]="form1">
             
             <div class="col-md-3" >
                 <div class="custom-control custom-radio">
@@ -40,20 +40,182 @@
             <div class="col-md-6 d-none-md">
 
             </div>
-            <div class="col-md-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" formControlName="name" class="form-control">
+        </div>
+        <div class="row" [formGroup]="form2">
+            <div class="col-md-4">
+                <label for="first_name" class="form-label">Fiest Name</label>
+                <input type="text" formControlName="first_name" class="form-control">
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <label for="middle_name" class="form-label">Middle Name</label>
                 <input type="text" formControlName="middle_name" class="form-control">
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <label for="last_name" class="form-label">Last Name</label>
                 <input type="text" formControlName="last_name" class="form-control">
             </div>
+            <div class="form-group col-md-4">
+                <label for="dob" class="form-label">Date of Birth
+                </label>
+                  <div class="input-group mb-3">
+                      <input id="last_name" aria-label="Sub Total"
+                          aria-describedby="basic-addon2" class="form-control"
+                          [formControlName]="'dob'" type="text" >
+                          
+                  </div>
+              </div>
+
+              <div class="form-group col-md-4">
+                <label for="age" class="form-label">Age </label>
+                  <div class="input-group mb-3">
+                      <input id="last_name" aria-label="Sub Total"
+                          aria-describedby="basic-addon2" class="form-control"
+                          [formControlName]="'age'" type="text" >
+                          
+                  </div>
+              </div>
+
+              <div class="form-group col-md-4">
+                <label for="relative" class="form-label">Father/Husband Name </label>
+                  <div class="input-group mb-3">
+                      <input id="last_name" aria-label="Sub Total"
+                          aria-describedby="basic-addon2" class="form-control"
+                          [formControlName]="'relative'" type="text" >
+                          
+                  </div>
+              </div>
+
+
+              
+
+              <div class="form-group col-md-4">
+                <label for="last_nameemail" class="form-label">Email id </label>
+                  <div class="input-group mb-3">
+                      <input id="last_name" aria-label="Sub Total"
+                          aria-describedby="basic-addon2" class="form-control"
+                          [formControlName]="'email'" type="text" >
+                          
+                  </div>
+              </div>
+
+              <div class="form-group col-md-4">
+                <label for="website" class="form-label">Website</label>
+                  <div class="input-group mb-3">
+                      <input id="last_name" aria-label="Sub Total"
+                          aria-describedby="basic-addon2" class="form-control"
+                          [formControlName]="'website'" type="text" >
+                          
+                  </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2" formGroupName="form2">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadio1" value="Male"  [formControlName]="'gender'" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadio1">Male</label>
+                      </div>
+                      
+                    </div>
+            
+              <div class="col-md-2" formGroupName="form2">
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio1" value="Female"  [formControlName]="'gender'" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio1">Female</label>
+                  </div>
+                  
+                </div>
+              </div>
+             
+              <div class="row">
+                  <div class="col-md-2" formGroupName="form2">
+                    <div class="custom-control custom-radio">
+                        <input class="custom-control-input" value="Female" type="radio" [formControlName]="'category'" id="flexRadioDefault1">
+                          <label class="form-check-label" for="flexRadioDefault1">
+                            Business
+                          </label>
+                    </div>
+                </div>
+  
+                <div class="col-md-2">
+                  <div class="custom-control custom-radio" formGroupName="form2">
+                      <input class="custom-control-input" value="Female" type="radio" [formControlName]="'category'" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                          Service
+                        </label>
+                  </div>
+              </div>
+  
+                <div class="col-md-2">
+                    <div class="custom-control custom-radio" formGroupName="form2">
+                      <input class="custom-control-input" value="Female" type="radio" [formControlName]="'category'" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                          Student
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group col-md-3" formGroupName="form2">
+                  <label for="details" class="form-label">Detailes </label>
+                    <div class="input-group mb-3">
+                        <input id="details" aria-label="Sub Total"
+                            aria-describedby="basic-addon2" class="form-control"
+                            [formControlName]="'details'" type="text" >
+                            
+                    </div>
+                </div>
+                <div class="form-group col-md-3" formGroupName="form2">
+                  <label for="date_of_joining" class="form-label">Date of Joining</label>
+                    <div class="input-group mb-3">
+                        <input id="date_of_joining" aria-label="Sub Total"
+                            aria-describedby="basic-addon2" class="form-control"
+                            [formControlName]="'date_of_joining'" type="text" >
+                            
+                    </div>
+                </div>
+  
+  
+                  <div class="col-md-2">
+                    <div class="custom-control custom-radio" formGroupName="form2">
+                        <input class="custom-control-input" value="Female" type="radio" formControlName="married_status" id="flexRadioDefault1">
+                          <label class="form-check-label" for="flexRadioDefault1">
+                            Married
+                          </label>
+                    </div>
+                </div>
+  
+                  <div class="col-md-2">
+                      <div class="custom-control custom-radio" formGroupName="form2">
+                        <input class="custom-control-input" value="Female" type="radio" formControlName="married_status" id="flexRadioDefault1">
+                          <label class="form-check-label" for="flexRadioDefault1">
+                            Un Married
+                          </label>
+                      </div>
+                  </div>
+                  <div class="col-md-2 d-none-md">
+                    
+                </div>
+                <div class="form-group col-md-3" formGroupName="form2">
+                  <label for="data_of_married" class="form-label">Date Of Married </label>
+                    <div class="input-group mb-3">
+                        <input id="data_of_married" aria-label="Sub Total"
+                            aria-describedby="basic-addon2" class="form-control"
+                            [formControlName]="'data_of_married'" type="text" >
+                            
+                    </div>
+                </div>
+                <div class="form-group col-md-3" formGroupName="form2">
+                  <label for="fee_paid_upto" class="form-label">Fees Paid Upto</label>
+                    <div class="input-group mb-3">
+                        <input id="fee_paid_upto" aria-label="Sub Total"
+                            aria-describedby="basic-addon2" class="form-control"
+                            [formControlName]="'fee_paid_upto'" type="text" >
+                            
+                    </div>
+                </div>
+  
+  
+              </div>
            <hr class="mt-3">
-                <div class="row">
+                <div class="row" formGroupName="form2">
                     <div formArrayName="contact">
                         <div class="from-group col-md-3" *ngFor="let contact of contact.controls let i=index" [formGroupName]="i">
                             <label for="contact" class="form-label">contact</label>
@@ -70,6 +232,7 @@
                 <hr class="mt-3">
 
                 <button type="button" class="btn btn-primary" (click)="addcontact()">Add</button>
+        <div class="row" [formGroup]="form2">
             <div class="card mt-4" formArrayName="address" style="width: 95%; max-width: 1000px; margin: 0 auto;">
                 <div class="card-body" *ngFor="let address of address.controls let i=index" [formGroupName]="i">
                     <div class="row">
@@ -77,55 +240,44 @@
                         <div class="col text-center" *ngIf="i<0">
                             <h5>No address Avalible</h5>
                         </div>
-                        <div class="col-md-3">
-                            <label for="address_type" class="form-label">Member Type</label>
+                        <div class="col-md-4">
+                            <label for="address_type" class="form-label">Address Type</label>
                             <select id="address_type" formControlName="address_type" class="form-select"
                             [compareWith]="compareFn" >
                             <option selected>Choose...</option>
                             <!-- <option *ngFor="let unit of weightOptions" [ngValue]="unit">{{unit.name}}</option> -->
                         </select>
                         </div>
-                        <div class="col-md-3">
-                            <label for="address" class="form-label">Member No</label>
-                            <input type="text" formControlName="address" class="form-control">
-                        </div>
-                        <div class="col-md-3">
-                            <label for="area" class="form-label">Area</label>
-                            <input type="text" formControlName="area" class="form-control">
-                        </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label for="house_no" class="form-label">House No</label>
                             <input type="text" formControlName="house_no" class="form-control">
                         </div>
-                        <div class="col-md-3">
-                            <label for="galli_muhala" class="form-label">Gali/Muhala</label>
-                            <input type="text" formControlName="galli_muhala" class="form-control">
+                        <div class="col-md-4">
+                            <label for="gali_mohalla" class="form-label">Gali/Mohalla</label>
+                            <input type="text" formControlName="gali_mohalla" class="form-control">
                         </div>
-                        <div class="col-md-3">
-                            <label for="colony" class="form-label">Colony</label>
-                            <input type="text" formControlName="colony" class="form-control">
-                        </div>
-                        <div class="col-md-3">
-                            <label for="country" class="form-label">Country</label>
-                            <input type="text" formControlName="country" class="form-control">
-                        </div>
-                        <div class="col-md-3">
-                            <label for="state" class="form-label">state</label>
-                            <input type="text" formControlName="state" class="form-control">
-                        </div>
-                        <div class="col-md-3">
-                            <label for="city" class="form-label">City</label>
-                            <input type="text" formControlName="city" class="form-control">
-                        </div>
-                        <div class="col-md-3">
-                            <label for="pincode" class="form-label">Pincode</label>
-                            <input type="text" formControlName="pincode" class="form-control">
-                        </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label for="landmark" class="form-label">Landmark</label>
                             <input type="text" formControlName="landmark" class="form-control">
                         </div>
-                        <div class="col-md-3 text-end">
+                        <div class="col-md-4">
+                            <label for="country" class="form-label">Country</label>
+                            <input type="text" formControlName="country" class="form-control">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="state" class="form-label">state</label>
+                            <input type="text" formControlName="state" class="form-control">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" formControlName="city" class="form-control">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="pincode" class="form-label">Pincode</label>
+                            <input type="text" formControlName="pincode" class="form-control">
+                        </div>
+                        
+                        <div class="col-md-4 text-end">
                             <button class="btn btn-outline-secondary" style="margin-top: 28px;" (click)="removeAddress(i)"
                                         type="button">{{i+1}} <i class="far fa-trash-alt"></i></button>
                         </div>

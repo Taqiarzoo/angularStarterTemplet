@@ -1,0 +1,67 @@
+<div class="card mt-5 mb-5"  >
+          
+    <div class="card-body ">
+        <div class="row">
+            <H5>{{'Select Head'}}</H5> 
+            
+            <hr>
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">S. NO</th>
+                    <th scope="col">MEMBER NO</th>
+                    <th scope="col">FIRST NAME</th>
+                    <th scope="col">LAST NAME </th>
+                    <th scope="col">
+                        MIDDLE NAME
+                    </th>
+                    <th scope="col">
+                        FATHER/HUSBAND NAME
+                    </th>
+                    <th scope="col">
+                        HOUSE NO
+                    </th>
+                    <th scope="col">
+                        GALI
+                    </th>
+                    <th scope="col">
+                        AREA
+                    </th>
+                    <th scope="col">
+                        CITY
+                    </th>
+                    <th scope="col">
+                        ACTION
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of data let j=index" #ref>
+                        <th scope="row">{{j}}</th>
+                        <td>{{data.first_name}}</td>
+                        <td>{{data.middle_name}}</td>
+                        <td>{{data.last_name}}</td>
+                        <td>{{data.relative}}</td>
+                        <td>{{data.house_no}}</td>
+                        <td>{{data.gali_mohalla}}</td>
+                        <td>{{data.house_no}}</td>
+                        <td>{{data.area}}</td>
+                        <td>{{data.city}}</td>
+                        <td>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio1" value="Member"  (change)="selectHead(data,j,$event,ref)" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio1">Member</label>
+                              </div>
+                            <div class="form-check">
+                            <input class="form-check-input" #check type="checkbox" value="" id="flexCheckDefault" >
+                          </div>
+                        
+                        </td>
+                     
+
+                      </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+ </div>
