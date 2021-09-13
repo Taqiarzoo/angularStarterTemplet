@@ -20,6 +20,7 @@ export class MemberComponent implements OnInit {
   memberList:any[]=
   [
     {
+    id:20,
     member_no:"121212",
     first_name:"Thornton",
     last_name: "Jacob",
@@ -213,12 +214,22 @@ form1:FormGroup
         last_name:new FormControl(''),
         search:new FormControl(''),
       })
-      
+      let page= localStorage.getItem("page")
+      if(page){
+        if(page=='family'){
+          this.family=true;
+          this.root=false;
+        }
+      }else{
+        localStorage.setItem('page','list')
+      }
      }
 
   getData(q:any, page:any, limit:any, order_by:any, order_dir:any){
     this.member_service.getMembers(q, page, limit, order_by, order_dir).pipe(takeUntil(this.destroy))
-    .subscribe((data: any) => {})
+    .subscribe((data: any) => {
+      console.log(data)
+    })
   }
 
 
@@ -238,27 +249,26 @@ form1:FormGroup
     console.log(this.familyArray)
     
   }
-  onCreateFamily(){}
-
-
-  createFamily(){
-    
+  onCreateFamily(){
     this.family=true
     this.dataToPass=this.familyArray
-
+    console.log(this.dataToPass)
     this.root=false;
+    console.log(this.dataToPass)
   }
 
-  onCreateMember(){
-    this.member=true
-    this.dataToPass={}
 
-    this.root=false;
+
+  onCreateMember(){
+    // this.member=true
+    // this.dataToPass={}
+
+    // this.root=false;
   }
 
   
   ngOnInit(): void {
-
+    this.getData(null,null,null,null,null)
   }
 
   ngOnDestroy() {
@@ -270,6 +280,8 @@ form1:FormGroup
 
   cancelFromChild(event) {
     this.root = true;
+    this.familyArray=[]
+    localStorage.setItem('page','list')
     if (event) {
       
     }

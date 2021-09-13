@@ -29,6 +29,7 @@
                 <select id="member_type" formControlName="member_type" class="form-select"
                     [compareWith]="compareFn" >
                     <option selected>Choose...</option>
+                    <option *ngFor="let types of membership_type" [value]="types">{{types.name}}</option>
                     <!-- <option *ngFor="let unit of weightOptions" [ngValue]="unit">{{unit.name}}</option> -->
                 </select>
             </div>
@@ -216,8 +217,8 @@
               </div>
            <hr class="mt-3">
                 <div class="row" formGroupName="form2">
-                    <div formArrayName="contact">
-                        <div class="from-group col-md-3" *ngFor="let contact of contact.controls let i=index" [formGroupName]="i">
+                    <div formArrayName="contacts">
+                        <div class="from-group col-md-3" *ngFor="let contact of contacts.controls let i=index" [formGroupName]="i">
                             <label for="contact" class="form-label">contact</label>
                             <div class="input-group">
                                 <input type="text" formControlName="contact" class="form-control">
@@ -233,8 +234,8 @@
 
                 <button type="button" class="btn btn-primary" (click)="addcontact()">Add</button>
         <div class="row" [formGroup]="form2">
-            <div class="card mt-4" formArrayName="address" style="width: 95%; max-width: 1000px; margin: 0 auto;">
-                <div class="card-body" *ngFor="let address of address.controls let i=index" [formGroupName]="i">
+            <div class="card mt-4" formArrayName="addresses" style="width: 95%; max-width: 1000px; margin: 0 auto;">
+                <div class="card-body" *ngFor="let address of addresses.controls let i=index" [formGroupName]="i">
                     <div class="row">
                         <hr class="mt-2" *ngIf="i>0">
                         <div class="col text-center" *ngIf="i<0">
@@ -245,6 +246,8 @@
                             <select id="address_type" formControlName="address_type" class="form-select"
                             [compareWith]="compareFn" >
                             <option selected>Choose...</option>
+                            <option *ngFor="let types of address_type" [value]="types">{{types.type}}</option>
+                            
                             <!-- <option *ngFor="let unit of weightOptions" [ngValue]="unit">{{unit.name}}</option> -->
                         </select>
                         </div>
@@ -252,6 +255,10 @@
                             <label for="house_no" class="form-label">House No</label>
                             <input type="text" formControlName="house_no" class="form-control">
                         </div>
+                        <div class="col-md-4">
+                          <label for="area" class="form-label">Area</label>
+                          <input type="text" formControlName="area" class="form-control">
+                      </div>
                         <div class="col-md-4">
                             <label for="gali_mohalla" class="form-label">Gali/Mohalla</label>
                             <input type="text" formControlName="gali_mohalla" class="form-control">
@@ -288,13 +295,12 @@
                     <button type="button" class="btn btn-primary text-end"   (click)="addaddress()">Add</button>
                 </div>
             </div>
-
-
-
-        
-
-   
   </div>
   </div>
+  <div class="card-footer">
+    <button type="button" class="btn btn-primary text-end" (click)="onCancel()">cancel</button>
+    <button type="button" class="btn btn-primary text-end" (click)="onSubmit()">Add Member</button>
+
+</div>
   </div>
 </form>

@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { MasterService } from 'src/app/services/master.service';
+import { MemberService } from 'src/app/services/member.service';
 
 @Component({
   selector: 'app-create',
@@ -8,8 +12,19 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 })
 export class CreateComponent implements OnInit {
   form:FormGroup
+
+  destroy: Subject<boolean> = new Subject<boolean>();
+
+  @Input() data:any
+  @Output() cancel: EventEmitter<boolean>;
+
+  membership_type=[]
+  address_type=[]
+
   constructor(
     private fb:FormBuilder,
+    private memberService:MemberService,
+    private masteService: MasterService,
   ) { 
     this.form=fb.group({
       form1:fb.group({
@@ -24,7 +39,7 @@ export class CreateComponent implements OnInit {
         dob:new FormControl(''),
         age:new FormControl(''),
         relative:new FormControl(''),
-        contact:fb.array([]),
+        contacts:fb.array([]),
         email:new FormControl(''),
         website:new FormControl(''),
         gender:new FormControl(''),
@@ -34,9 +49,19 @@ export class CreateComponent implements OnInit {
         married_status:new FormControl(''),
         data_of_married:new FormControl(''),
         fee_paid_upto:new FormControl(''),
-        address:fb.array([]),
+        addresses:fb.array([]),
         profile:new FormControl(''),
       })
+    })
+
+    this.masteService.getMembershipType().pipe(takeUntil(this.destroy)).subscribe((data:any)=>{
+      this.membership_type=data.membership_types;
+      console.log(this.membership_type)
+    })
+
+    this.masteService.getAddressType().pipe(takeUntil(this.destroy)).subscribe((data:any)=>{
+      this.address_type=data.address_type;
+      console.log(this.address_type)
     })
   }
   
@@ -52,20 +77,20 @@ export class CreateComponent implements OnInit {
   get form2():FormGroup{
     return this.form.get('form2') as FormGroup
   }
-  get contact():FormArray{
-    return this.form2.get("contact") as FormArray
+  get contacts():FormArray{
+    return this.form2.get("contacts") as FormArray
   }
 
-  get address():FormArray{
-    return this.form2.get("address") as FormArray
+  get addresses():FormArray{
+    return this.form2.get("addresses") as FormArray
   }
 
   addcontact(contact?){
-    this.contact.push(this.newContact(contact))
+    this.contacts.push(this.newContact(contact))
   }
 
   removeContact(index){
-    this.contact.removeAt(index)
+    this.contacts.removeAt(index)
   }
 
   newContact(contact?):FormGroup{
@@ -75,11 +100,11 @@ export class CreateComponent implements OnInit {
   }
 
   removeAddress(index){
-    this.address.removeAt(index)
+    this.addresses.removeAt(index)
   }
 
   addaddress(address?){
-    this.address.push(this.newAddress(address))
+    this.addresses.push(this.newAddress(address))
   }
 
   newAddress(address?):FormGroup{
@@ -99,6 +124,29 @@ export class CreateComponent implements OnInit {
 
   compareFn(o1, o2) {
     return o1 && o2 ? o1.id === o2.id : o1 === o2;
+  }
+
+  onSubmit(){
+    console.log(this.form)
+    if(this.form.valid){
+      this.memberService.postMember({
+        ...this.form1.value,
+        ...this.form2.value
+      }).pipe(takeUntil(this.destroy)).subscribe((data:any)=>{
+        if(data.status==1){
+
+        }
+      })
+    }
+  }
+
+  onCancel(){
+    this.cancel.emit(true);
+  }
+
+  ngOnDestroy() {
+    this.destroy.next(true);
+    this.destroy.unsubscribe();
   }
 
 }

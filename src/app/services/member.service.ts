@@ -18,7 +18,6 @@ export class MemberService {
 
 getMembers(query:any, page:any, limit:any, orderBy:any, orderDir:any) {
   let params = new HttpParams();
-
   if (page) {
     params = params.append('page', page.toString());
   }
@@ -34,18 +33,18 @@ getMembers(query:any, page:any, limit:any, orderBy:any, orderDir:any) {
   if (query) {
     params = params.append('q', query);
   }
-  return this.http.get(`${environment.apiUrl}/api/company/users`, params);
+  return this.http.get(`${environment.apiUrl}/api/member/list`, params);
 }
 
 postMember(data:any) {
-  return this.http.post(`${environment.apiUrl}/api/company/user`, data, {});
+  return this.http.post(`${environment.apiUrl}/api/member`, data, {});
 }
 
 patchMember(data:any) {
-  return this.http.patch(`${environment.apiUrl}/api/company/user`, data, {});
+  return this.http.patch(`${environment.apiUrl}/api/member`, data, {});
 }
 
 deleteMember(id:any) {
-  return this.http.delete(`${environment.apiUrl}/api/company/user`, new HttpParams({fromString: `id=${id}`}))
+  return this.http.delete(`${environment.apiUrl}/api/member`, new HttpParams({fromString: `id=${id}`}))
 }
 }

@@ -8,5 +8,5 @@ export const environment = {
     fontawesome: 'Font Awesome 5.15.3',
     
   },
-  apiUrl:"http://localhost.com:8080"
+  apiUrl:"http://localhost:3000"
 };

@@ -31,13 +31,13 @@ const routes: Routes = [
           title:'Members Add'
         }
       },
-      {
-        path: 'family',
-        component: CreateFamilyComponent,
-        data:{
-          title:'Members Add'
-        }
-      }
+      // {
+      //   path: 'family',
+      //   component: CreateFamilyComponent,
+      //   data:{
+      //     title:'Members Add'
+      //   }
+      // }
     
     ]
     }
