@@ -1,14 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Location } from '@angular/common';
+import { ActivatedRoute,Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MemberService } from 'src/app/services/member.service';
+import { MasterService } from 'src/app/services/master.service';
 
+class filter{
+  static is_assign_family:boolean;
+  static currentAreaId:string;
+  static  currentGaliMohallaId:string;
+  static currentLast_name:string;
+}
 @Component({
   selector: 'app-member',
   templateUrl: './member.component.html',
   styleUrls: ['./member.component.css']
 })
+
 export class MemberComponent implements OnInit {
 
   destroy: Subject<boolean> = new Subject<boolean>();
@@ -17,195 +27,31 @@ export class MemberComponent implements OnInit {
   root:boolean= true;
   member:boolean=false;
   family:boolean=false;
-  memberList:any[]=
-  [
-    {
-    id:20,
-    member_no:"121212",
-    first_name:"Thornton",
-    last_name: "Jacob",
-    relative: "abc",
-    house_no: "F/19",
-    gali_mohalla:'satiya Vaihar',
-    area:'lalKothi',
-    city:'jaipur',
-  },
-  {
-    id:1,
-    member_no:"121212",
-    first_name:"Thornton",
-    last_name: "Jacob",
-    relative: "abc",
-    house_no: "F/19",
-    gali_mohalla:'satiya Vaihar',
-    area:'lalKothi',
-    city:'jaipur',
-  },
-  {
-    id:2,
-    member_no:"121212",
-    first_name:"Thornton",
-    last_name: "Jacob",
-    relative: "abc",
-    house_no: "F/19",
-    gali_mohalla:'satiya Vaihar',
-    area:'lalKothi',
-    city:'jaipur',
-  },
-  {
-    id:3,
-    member_no:"121212",
-    first_name:"Thornton",
-    last_name: "Jacob",
-    relative: "abc",
-    house_no: "F/19",
-    gali_mohalla:'satiya Vaihar',
-    area:'lalKothi',
-    city:'jaipur',
-  },
-  {
-    id:4,
-    member_no:"121212",
-    first_name:"Thornton",
-    last_name: "Jacob",
-    relative: "abc",
-    house_no: "F/19",
-    gali_mohalla:'satiya Vaihar',
-    area:'lalKothi',
-    city:'jaipur',
-  },
-  {
-    id:5,
-    member_no:"121212",
-    first_name:"Thornton",
-    last_name: "Jacob",
-    relative: "abc",
-    house_no: "F/19",
-    gali_mohalla:'satiya Vaihar',
-    area:'lalKothi',
-    city:'jaipur',
-  },
-  {
-    id:6,
-    member_no:"121212",
-    first_name:"Thornton",
-    last_name: "Jacob",
-    relative: "abc",
-    house_no: "F/19",
-    gali_mohalla:'satiya Vaihar',
-    area:'lalKothi',
-    city:'jaipur',
-  },
-  {
-    id:7,
-    member_no:"121212",
-    first_name:"Thornton",
-    last_name: "Jacob",
-    relative: "abc",
-    house_no: "F/19",
-    gali_mohalla:'satiya Vaihar',
-    area:'lalKothi',
-    city:'jaipur',
-  },
-  {
-    id:8,
-    member_no:"121212",
-    first_name:"Thornton",
-    last_name: "Jacob",
-    relative: "abc",
-    house_no: "F/19",
-    gali_mohalla:'satiya Vaihar',
-    area:'lalKothi',
-    city:'jaipur',
-  },
-  {
-    id:9,
-    member_no:"121212",
-    first_name:"Thornton",
-    last_name: "Jacob",
-    relative: "abc",
-    house_no: "F/19",
-    gali_mohalla:'satiya Vaihar',
-    area:'lalKothi',
-    city:'jaipur',
-  },
-  {
-    id:10,
-    member_no:"121212",
-    first_name:"Thornton",
-    last_name: "Jacob",
-    relative: "abc",
-    house_no: "F/19",
-    gali_mohalla:'satiya Vaihar',
-    area:'lalKothi',
-    city:'jaipur',
-  },
-  {
-    id:11,
-    member_no:"121212",
-    first_name:"Thornton",
-    last_name: "Jacob",
-    relative: "abc",
-    house_no: "F/19",
-    gali_mohalla:'satiya Vaihar',
-    area:'lalKothi',
-    city:'jaipur',
-  },
-  {
-    id:12,
-    member_no:"121212",
-    first_name:"Thornton",
-    last_name: "Jacob",
-    relative: "abc",
-    house_no: "F/19",
-    gali_mohalla:'satiya Vaihar',
-    area:'lalKothi',
-    city:'jaipur',
-  },
-  {
-    id:13,
-    member_no:"121212",
-    first_name:"Thornton",
-    last_name: "Jacob",
-    relative: "abc",
-    house_no: "F/19",
-    gali_mohalla:'satiya Vaihar',
-    area:'lalKothi',
-    city:'jaipur',
-  },
-  {
-    id:14,
-    member_no:"121212",
-    first_name:"Thornton",
-    last_name: "Jacob",
-    relative: "abc",
-    house_no: "F/19",
-    gali_mohalla:'satiya Vaihar',
-    area:'lalKothi',
-    city:'jaipur',
-  },
-  {
-    id:15,
-    member_no:"121212",
-    first_name:"Thornton",
-    last_name: "Jacob",
-    relative: "abc",
-    house_no: "F/19",
-    gali_mohalla:'satiya Vaihar',
-    area:'lalKothi',
-    city:'jaipur',
-  },
-  
-]
+  memberList:any[]=[]
+
+  galliMohalla:any[]=[]
+  lastNames:any[]=[]
+
+  currentCountryId:any =1
+  currentStateId:any=29
+  currentCityId:any=1
+
+
   
   
 form1:FormGroup
   enableCreateFamily: boolean=false;
   dataToPass: any;
+  currentArea: any;
+  areas: any;
 
   constructor(
     private member_service: MemberService,
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    private router:Router,
+    private active:ActivatedRoute,
+    private masterService:MasterService,
+    private location:Location
     ) {
       this.form1=fb.group({
         house_no:new FormControl(''),
@@ -223,12 +69,17 @@ form1:FormGroup
       }else{
         localStorage.setItem('page','list')
       }
+      masterService.getArea(1,29,1).pipe(takeUntil(this.destroy)).subscribe((data:any)=>{
+        this.areas=data.areas
+      })
+      
+      
      }
 
-  getData(q:any, page:any, limit:any, order_by:any, order_dir:any){
-    this.member_service.getMembers(q, page, limit, order_by, order_dir).pipe(takeUntil(this.destroy))
+  getData(q:any, page:any, limit:any, order_by:any, order_dir:any,filters:any){
+    this.member_service.getMembers(q, page, limit, order_by, order_dir,filters).pipe(takeUntil(this.destroy))
     .subscribe((data: any) => {
-      console.log(data)
+      this.memberList=data.member
     })
   }
 
@@ -250,30 +101,74 @@ form1:FormGroup
     
   }
   onCreateFamily(){
+    
     this.family=true
     this.dataToPass=this.familyArray
     console.log(this.dataToPass)
     this.root=false;
-    console.log(this.dataToPass)
+    
   }
 
 
 
   onCreateMember(){
-    // this.member=true
-    // this.dataToPass={}
+    
+  }
 
-    // this.root=false;
+  onAreaSelect(event){
+    
+   filter.currentAreaId=event.target.value
+   this.masterService.getGalliMohalla(filter.currentAreaId).pipe(takeUntil(this.destroy)).subscribe((data:any)=>{
+     this.galliMohalla=data.galli_mohalla
+     this.form1.patchValue({
+         house_no:null,
+        gali_mohalla:null,
+        last_name:null
+    })
+   })
+  }
+
+  onGMSelect(event){
+    filter.currentGaliMohallaId=event.target.value
+    this.masterService.getLastNames(filter.currentAreaId,filter.currentGaliMohallaId).pipe(takeUntil(this.destroy)).subscribe((data:any)=>{
+      this.lastNames=data.last_names
+      this.form1.patchValue({
+        house_no:null,
+        last_name:null
+    })
+    })
+  }
+  onLastNameSelect(event){
+    filter.currentLast_name=event.target.value
+    this.form1.patchValue({
+      house_no:null,
+  })
   }
 
   
   ngOnInit(): void {
-    this.getData(null,null,null,null,null)
+    this.active.queryParams.subscribe(data => {
+        filter.is_assign_family=data.is_assign_family
+        console.log(filter)
+      this.getData(null,null,null,null,null,filter)
+        this.form1.patchValue({
+          house_no:null,
+          gali_mohalla:null,
+          area:null,
+          last_name:null
+      })
+  })
+    console.log(this.router.getCurrentNavigation())
+    
   }
 
   ngOnDestroy() {
     this.destroy.next(true);
     this.destroy.unsubscribe();
+  }
+
+  onFilter(){
+    this.getData(null,null,null,null,null,filter)
   }
 
   
