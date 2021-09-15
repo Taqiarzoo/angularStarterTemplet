@@ -7,6 +7,9 @@ import { NotFoundComponent } from './modules/general/not-found/not-found.compone
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { CommonModule } from '@angular/common';
 
@@ -24,6 +27,9 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularMultiSelectModule,
+    BsDatepickerModule.forRoot(), 
+   
   
   ],
   providers: [],

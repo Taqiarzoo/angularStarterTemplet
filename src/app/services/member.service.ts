@@ -16,7 +16,9 @@ export class MemberService {
    }
 
 
-getMembers(query:any, page:any, limit:any, orderBy:any, orderDir:any) {
+getMembers(query:any, page:any, limit:any, orderBy:any, orderDir:any,filter:any) {
+  console.log(filter.areaId)
+  console.log(filter.is_assign_family)
   let params = new HttpParams();
   if (page) {
     params = params.append('page', page.toString());
@@ -32,6 +34,19 @@ getMembers(query:any, page:any, limit:any, orderBy:any, orderDir:any) {
   }
   if (query) {
     params = params.append('q', query);
+  }
+  if(filter?.is_assign_family){
+    params=params.append('is_assign_family',filter.is_assign_family)
+  }
+  
+  if(filter?.currentAreaId){
+    params=params.append('areaId',filter.currentAreaId)
+  }
+  if(filter?.currentGaliMohallaId){
+    params=params.append('galimohallaId',filter.currentGaliMohallaId)
+  }
+  if(filter?.currentLast_name){
+    params=params.append('last_name',filter.currentLast_name)
   }
   return this.http.get(`${environment.apiUrl}/api/member/list`, params);
 }

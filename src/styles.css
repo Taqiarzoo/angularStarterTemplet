@@ -2,3 +2,7 @@ body {
   color: black;
   font-weight: 400;
 }
+
+.removeAllHide .clear-all{
+    display: none !important;
+}

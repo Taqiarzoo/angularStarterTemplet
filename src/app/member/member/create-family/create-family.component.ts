@@ -31,6 +31,7 @@ export class CreateFamilyComponent implements OnInit {
   selectHead(data:any,i:any,event,tableData){
     console.log(event.target.checked)
     this.head=data;
+    console.log(data)
   }
 
   get realtion():FormArray{

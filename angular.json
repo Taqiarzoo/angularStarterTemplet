@@ -34,7 +34,8 @@
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-              "src/assets/params/css/navbar.css"
+              "src/assets/params/css/navbar.css",
+              "node_modules/angular2-multiselect-dropdown/themes/default.theme.scss"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"

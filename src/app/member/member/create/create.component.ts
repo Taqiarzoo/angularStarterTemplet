@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AngularMultiSelect } from 'angular2-multiselect-dropdown';
+
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MasterService } from 'src/app/services/master.service';
@@ -17,9 +19,48 @@ export class CreateComponent implements OnInit {
 
   @Input() data:any
   @Output() cancel: EventEmitter<boolean>;
+  @ViewChild('gm', { static: false }) gmRef: ElementRef<AngularMultiSelect>;
 
   membership_type=[]
   address_type=[]
+  countries: any;
+  states: any;
+  cities: any;
+  currentCuntryId: any;
+  currentStateId: any;
+  currentCityId: any;
+  areas: any;
+  currentAreaId: any;
+  currentGalliMohallaId: any;
+  galliMohalla: any=[];
+
+  areadropdownSettings = {
+    singleSelection: true,
+    classes:"removeAllHide",
+    text: "Select Area",
+    addNewItemOnFilter:true,
+    addNewButtonText:"Add Area",
+    escapeToClose:true,
+    enableSearchFilter: true,
+    searchAutofocus: false,
+    autoPosition: false,
+    tagToBody:false,
+    position: "bottom",
+  };
+
+  galiMohallaDropdownSettings = {
+    singleSelection: true,
+    classes:"removeAllHide",
+    text: "Select Gali/Mohalla",
+    addNewButtonText:"Add Gali/Mohalla",
+    escapeToClose:true,
+    enableSearchFilter: true,
+    searchAutofocus: false,
+    autoPosition: false,
+    tagToBody:false,
+    addNewItemOnFilter:true,
+    position: "bottom",
+  };
 
   constructor(
     private fb:FormBuilder,
@@ -59,9 +100,16 @@ export class CreateComponent implements OnInit {
       console.log(this.membership_type)
     })
 
+    
+
     this.masteService.getAddressType().pipe(takeUntil(this.destroy)).subscribe((data:any)=>{
       this.address_type=data.address_type;
       console.log(this.address_type)
+    })
+
+    this.masteService.getCountry().pipe(takeUntil(this.destroy)).subscribe((data:any)=>{
+      this.countries=data.countries
+
     })
   }
   
@@ -118,6 +166,82 @@ export class CreateComponent implements OnInit {
       state:new FormControl(address?.state?address.state:''),
       city:new FormControl(address?.city?address.city:''),
       pincode:new FormControl(address?.pincode?address.pincode:''),
+    })
+  }
+
+  onCountrySelect(event){
+    this.currentCuntryId=event.target.value;
+   this.masteService.getState(this.currentCuntryId).pipe(takeUntil(this.destroy)).subscribe((data:any)=>{
+     this.states=data.states
+   }) 
+  }
+
+  onStateSelect(event){
+    this.currentStateId=event.target.value
+    this.masteService.getcities(this.currentCuntryId,this.currentStateId).pipe(takeUntil(this.destroy)).subscribe((data:any)=>{
+      this.cities=data.cities
+    }) 
+  }
+
+  onCitySelect(event){
+    this.currentCityId=event.target.value
+    this.masteService.getArea(this.currentCuntryId,this.currentStateId,this.currentCityId).pipe(takeUntil(this.destroy)).subscribe((data:any)=>{
+      this.areas=data.areas
+    })
+  }
+
+  onAreaSelect(event){
+    console.log(event)
+    this.currentAreaId=event.id
+    this.masteService.getGalliMohalla(this.currentAreaId).pipe(takeUntil(this.destroy)).subscribe((data:any)=>{
+      this.galliMohalla=data.galli_mohalla;
+    })
+  }
+
+  onGaliMohallaSelect(event){
+
+  }
+
+  addNewGaliMohalla(event,index,nativeElement){
+    this.masteService.createGalliMohalla({
+      name:event,
+      areaId:this.currentAreaId
+    }).pipe(takeUntil(this.destroy)).subscribe((data:any)=>{
+        if(data.status==1){
+            this.galliMohalla.push(data.data)
+            console.log(this.galliMohalla)
+            this.addresses.get(index.toString()).patchValue({
+              gali_mohalla:[data.data]
+            })
+        }else{
+          //TODO handle Error
+        }
+        //TODO close the dropdown dynamically
+      // console.log(this.gmRef.dropdownListElem)
+      //this.gmRef.triggerHandler({type:"keydown", which:27})
+      //this.gmRef.nadispatchEvent(new KeyboardEvent('keydown', {'key': 'Escape'}));
+    })
+  }
+  addNewArea(event,index,nativeElement){
+    this.masteService.createArea({
+            name:event,
+            countryId:this.currentCuntryId,
+            stateId:this.currentStateId,
+            cityId:this.currentCityId
+    }).pipe(takeUntil(this.destroy)).subscribe((data:any)=>{
+      if(data.status==1){
+          this.areas.push(data.data)
+          console.log(this.areas)
+          this.addresses.get(index.toString()).patchValue({
+            area:[data.data]
+        })
+      }else{
+        //TODO handle Error
+      }
+        //TODO close the dropdown dynamically
+      // console.log(this.gmRef.dropdownListElem)
+      //this.gmRef.triggerHandler({type:"keydown", which:27})
+      //this.gmRef.nadispatchEvent(new KeyboardEvent('keydown', {'key': 'Escape'}));
     })
   }
 

@@ -60,7 +60,9 @@
                 </label>
                   <div class="input-group mb-3">
                       <input id="last_name" aria-label="Sub Total"
-                          aria-describedby="basic-addon2" class="form-control"
+                          aria-describedby="basic-addon2"
+                          bsDatepicker
+                          class="form-control"
                           [formControlName]="'dob'" type="text" >
                           
                   </div>
@@ -130,7 +132,7 @@
               <div class="row">
                   <div class="col-md-2" formGroupName="form2">
                     <div class="custom-control custom-radio">
-                        <input class="custom-control-input" value="Female" type="radio" [formControlName]="'category'" id="flexRadioDefault1">
+                        <input class="custom-control-input" value="Business" type="radio" [formControlName]="'category'" id="flexRadioDefault1">
                           <label class="form-check-label" for="flexRadioDefault1">
                             Business
                           </label>
@@ -139,7 +141,7 @@
   
                 <div class="col-md-2">
                   <div class="custom-control custom-radio" formGroupName="form2">
-                      <input class="custom-control-input" value="Female" type="radio" [formControlName]="'category'" id="flexRadioDefault1">
+                      <input class="custom-control-input" value="Service" type="radio" [formControlName]="'category'" id="flexRadioDefault1">
                         <label class="form-check-label" for="flexRadioDefault1">
                           Service
                         </label>
@@ -148,7 +150,7 @@
   
                 <div class="col-md-2">
                     <div class="custom-control custom-radio" formGroupName="form2">
-                      <input class="custom-control-input" value="Female" type="radio" [formControlName]="'category'" id="flexRadioDefault1">
+                      <input class="custom-control-input" value="Student" type="radio" [formControlName]="'category'" id="flexRadioDefault1">
                         <label class="form-check-label" for="flexRadioDefault1">
                           Student
                         </label>
@@ -168,6 +170,7 @@
                     <div class="input-group mb-3">
                         <input id="date_of_joining" aria-label="Sub Total"
                             aria-describedby="basic-addon2" class="form-control"
+                            bsDatepicker
                             [formControlName]="'date_of_joining'" type="text" >
                             
                     </div>
@@ -176,7 +179,7 @@
   
                   <div class="col-md-2">
                     <div class="custom-control custom-radio" formGroupName="form2">
-                        <input class="custom-control-input" value="Female" type="radio" formControlName="married_status" id="flexRadioDefault1">
+                        <input class="custom-control-input" value="Female" type="radio" [formControlName]="'married_status'" id="flexRadioDefault1">
                           <label class="form-check-label" for="flexRadioDefault1">
                             Married
                           </label>
@@ -185,7 +188,7 @@
   
                   <div class="col-md-2">
                       <div class="custom-control custom-radio" formGroupName="form2">
-                        <input class="custom-control-input" value="Female" type="radio" formControlName="married_status" id="flexRadioDefault1">
+                        <input class="custom-control-input" value="Female" type="radio" [formControlName]="'married_status'" id="flexRadioDefault1">
                           <label class="form-check-label" for="flexRadioDefault1">
                             Un Married
                           </label>
@@ -199,6 +202,7 @@
                     <div class="input-group mb-3">
                         <input id="data_of_married" aria-label="Sub Total"
                             aria-describedby="basic-addon2" class="form-control"
+                            bsDatepicker
                             [formControlName]="'data_of_married'" type="text" >
                             
                     </div>
@@ -246,45 +250,87 @@
                             <select id="address_type" formControlName="address_type" class="form-select"
                             [compareWith]="compareFn" >
                             <option selected>Choose...</option>
-                            <option *ngFor="let types of address_type" [value]="types">{{types.type}}</option>
+                            <option *ngFor="let types of address_type" [value]="types.id">{{types.type}}</option>
                             
                             <!-- <option *ngFor="let unit of weightOptions" [ngValue]="unit">{{unit.name}}</option> -->
                         </select>
                         </div>
                         <div class="col-md-4">
-                            <label for="house_no" class="form-label">House No</label>
-                            <input type="text" formControlName="house_no" class="form-control">
-                        </div>
+                          <label for="country" class="form-label">Country</label>
+                          <select id="country" (change)="onCountrySelect($event)" formControlName="country" class="form-select"
+                          [compareWith]="compareFn" >
+                          <option selected>Choose...</option>
+                          <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
+                          </select>
+                      </div>
+                      <div class="col-md-4">
+                          <label for="state" class="form-label">state</label>
+                          <select id="state" (change)="onStateSelect($event)" formControlName="state" class="form-select"
+                          [compareWith]="compareFn" >
+                          <option selected>Choose...</option>
+                          <option *ngFor="let state of states" [value]="state.id">{{state.name}}</option>
+                          </select>
+                      </div>
+                      <div class="col-md-4">
+                          <label for="city" class="form-label">City</label>
+                          <select id="city" (change)="onCitySelect($event)" formControlName="city" class="form-select"
+                          [compareWith]="compareFn" >
+                            <option selected>Choose...</option>
+                            <option *ngFor="let city of cities" [value]="city.id">{{city.name}}</option>
+                          </select>
+                      </div>
+                        
                         <div class="col-md-4">
-                          <label for="area" class="form-label">Area</label>
-                          <input type="text" formControlName="area" class="form-control">
+                            <label for="area" class="form-label">Area</label>
+                            <angular2-multiselect class="flex-grow-1" id="area" [data]="areas"
+                                      formControlName="area" [settings]="areadropdownSettings"
+                                      (onSelect)="onAreaSelect($event)" (onAddFilterNewItem)="addNewArea($event,i,gm)">
+                                      <c-item>
+                                          <ng-template let-item="item">
+                                              <label>{{item.name}}</label>
+                                          </ng-template>
+                                      </c-item> 
+                                      <c-badge>
+                                          <ng-template let-item="item">
+                                              <label style="margin: 0px;">{{item.name}}</label>
+                                          </ng-template>
+                                      </c-badge>
+                            </angular2-multiselect>
                       </div>
                         <div class="col-md-4">
                             <label for="gali_mohalla" class="form-label">Gali/Mohalla</label>
-                            <input type="text" formControlName="gali_mohalla" class="form-control">
+                            <angular2-multiselect class="flex-grow-1" id="area" [data]="galliMohalla" #gm
+                                      formControlName="gali_mohalla" [settings]="galiMohallaDropdownSettings"
+                                      (onSelect)="onAreaSelect($event)" (onAddFilterNewItem)="addNewGaliMohalla($event,i,gm)">
+                                      <c-item>
+                                          <ng-template let-item="item">
+                                              <label>{{item.name}}</label>
+                                          </ng-template>
+                                      </c-item> 
+                                      <c-badge>
+                                          <ng-template let-item="item">
+                                              <label style="margin: 0px;">{{item.name}}</label>
+                                          </ng-template>
+                                      </c-badge>
+                           </angular2-multiselect>
                         </div>
+                        <div class="col-md-4">
+                          <label for="house_no" class="form-label">House No</label>
+                          <input type="text" formControlName="house_no" class="form-control">
+                      </div>
                         <div class="col-md-4">
                             <label for="landmark" class="form-label">Landmark</label>
                             <input type="text" formControlName="landmark" class="form-control">
                         </div>
-                        <div class="col-md-4">
-                            <label for="country" class="form-label">Country</label>
-                            <input type="text" formControlName="country" class="form-control">
-                        </div>
-                        <div class="col-md-4">
-                            <label for="state" class="form-label">state</label>
-                            <input type="text" formControlName="state" class="form-control">
-                        </div>
-                        <div class="col-md-4">
-                            <label for="city" class="form-label">City</label>
-                            <input type="text" formControlName="city" class="form-control">
-                        </div>
+                        
                         <div class="col-md-4">
                             <label for="pincode" class="form-label">Pincode</label>
                             <input type="text" formControlName="pincode" class="form-control">
                         </div>
+
                         
-                        <div class="col-md-4 text-end">
+                        
+                        <div class="col text-end">
                             <button class="btn btn-outline-secondary" style="margin-top: 28px;" (click)="removeAddress(i)"
                                         type="button">{{i+1}} <i class="far fa-trash-alt"></i></button>
                         </div>

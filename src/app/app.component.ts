@@ -59,10 +59,27 @@ export class AppComponent {
     public renderer: Renderer2) { }
 
   onSelectMenu(link: any): void {
+
     const element = document.getElementById('bd-docs-nav');
     this.renderer.removeClass(element, 'show');
     const route = '/' + link;
-    this.router.navigate([route]);
+    if(link=='all'){
+      this.router.navigate(['/'],{queryParams: {
+        is_assign_family: null
+      }});
+    }
+    else if(link=='NotAttached'){
+      this.router.navigate(['/'],{queryParams: {
+        is_assign_family: false
+      }});
+    }else if(link=='Attached'){
+      this.router.navigate(['/'],{queryParams: {
+        is_assign_family: true
+      }});
+    }else{
+      this.router.navigate([route]);
+    }
+    
   }
 
 

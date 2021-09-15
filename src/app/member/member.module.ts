@@ -5,6 +5,8 @@ import { MemberComponent } from './member/member.component';
 import { CreateComponent } from './member/create/create.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateFamilyComponent } from './member/create-family/create-family.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 
 
 
@@ -48,10 +50,14 @@ const routes: Routes = [
     MemberComponent,
     CreateComponent,
     CreateFamilyComponent,
+    
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    FormsModule,
+    AngularMultiSelectModule,
+    BsDatepickerModule.forRoot(),
     ReactiveFormsModule,
     FormsModule
     

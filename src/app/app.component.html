@@ -8,7 +8,7 @@
           data-canonical-src="https://api.ganatan.com/articles/img/forkme.png" />
       </a>
       <a class="navbar-brand" routerLink="/">
-        <span class="me-1">ganatan</span>
+        <span class="me-1">S3</span>
         <img src="assets/params/images/logo/ganatan.png" width="20" height="20" alt="">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#bd-docs-nav"
@@ -60,13 +60,14 @@
           <a class="bd-select d-inline-flex align-items-center rounded" data-bs-toggle="collapse" href="#ganatan-collapse"
             role="button" aria-expanded="true" aria-current="true">
             <i class="fas fa-house-user me-2"></i>
-            About Ganatan
+            Members
           </a>
           <ul class="list-unstyled font-weight-normal mb-2 collapse" id="ganatan-collapse">
-            <li><a (click)="onSelectMenu('about')" class="d-inline-flex align-items-center rounded active"
-                aria-current="page">About</a>
+            <li><a (click)="onSelectMenu('all')" class="d-inline-flex align-items-center rounded active"
+                aria-current="page">All</a>
             </li>
-            <li><a (click)="onSelectMenu('contact')" class="d-inline-flex align-items-center rounded">Contact</a></li>
+            <li><a (click)="onSelectMenu('NotAttached')" class="d-inline-flex align-items-center rounded">Not Attached</a></li>
+            <li><a (click)="onSelectMenu('Attached')" class="d-inline-flex align-items-center rounded">Attached</a></li>
           </ul>
         </li>
         <li *ngFor="let item of items; let i = index" class="mb-1">

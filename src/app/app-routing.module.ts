@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { MemberComponent } from './member/member/member.component';
 
 import { HomeComponent } from './modules/general/home/home.component';
 import { NotFoundComponent } from './modules/general/not-found/not-found.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, },
+  { path: '', component: MemberComponent, },
   {
     path: 'httpclient',
     loadChildren: () => import('./modules/application/items/items.module')
