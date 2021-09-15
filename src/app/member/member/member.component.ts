@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MemberService } from 'src/app/services/member.service';
 import { MasterService } from 'src/app/services/master.service';
+import { FamilyService } from 'src/app/services/family.service';
 
 class filter{
   static is_assign_family:boolean;
@@ -51,6 +52,7 @@ form1:FormGroup
     private router:Router,
     private active:ActivatedRoute,
     private masterService:MasterService,
+    private familyService: FamilyService,
     private location:Location
     ) {
       this.form1=fb.group({
@@ -101,17 +103,30 @@ form1:FormGroup
     
   }
   onCreateFamily(){
-    
-    this.family=true
-    this.dataToPass=this.familyArray
-    console.log(this.dataToPass)
-    this.root=false;
-    
+    this.familyService.createFamily(
+      {
+        family:this.familyArray
+      }
+    )
+      .pipe(takeUntil(this.destroy)).subscribe((data:any)=>{
+      if(data.status==1){
+          this.family=true
+          this.dataToPass=this.familyArray
+          console.log(this.dataToPass)
+          this.root=false;
+      }else{
+        //TODO Error Handling
+      }
+    })
   }
 
 
 
   onCreateMember(){
+    
+  }
+
+  onViewFamily(){
     
   }
 

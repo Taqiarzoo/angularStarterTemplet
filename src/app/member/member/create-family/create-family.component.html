@@ -64,7 +64,7 @@
 
     <div class="card-footer">
         <button type="button" class="btn btn-primary text-end" (click)="onCancel()">cancel</button>
-        <button type="button" class="btn btn-primary text-end" (click)="onSave(data)">Select Head</button>
+        <button type="button" class="btn btn-primary text-end" (click)="onheadSelect(data)">Select Head</button>
 
     </div>
  </div>
@@ -110,8 +110,8 @@
                     </th>
                   </tr>
                 </thead>
-                <tbody>
-                    <tr *ngFor="let data of data let j=index" #ref>
+                <tbody formArrayName="realtion">
+                    <tr *ngFor="let data of data let j=index" [formGroupName]="j" #ref >
                         <th scope="row">{{j}}</th>
                         <td>{{data.first_name}}</td>
                         <td>{{data.middle_name}}</td>

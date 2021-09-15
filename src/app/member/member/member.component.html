@@ -114,10 +114,14 @@
                         <td>{{data?.address[0]?.area?.galiMohalla[0]?.name}}</td>
                         <td>{{data?.address[0]?.area?.name}}</td>
                         <td>{{data?.address[0]?.city?.name}}</td>
-                        <td><div class="form-check">
+                        <td>
+                          
+                          <div class="form-check" *ngIf="!data.is_assign_family">
                             <input class="form-check-input" #check type="checkbox" value="" id="flexCheckDefault" (change)="SelectToFamily(data,j,$event,ref)">
                           </div>
-                        
+                          <div *ngIf="data.is_assign_family">
+                            <button class="btn btn-secondary" (click)="onViewFamily()"><i class="fas fa-info"></i></button>
+                          </div>
                         </td>
                      
 

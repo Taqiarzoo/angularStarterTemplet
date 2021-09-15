@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { FamilyService } from 'src/app/services/family.service';
 
 @Component({
   selector: 'app-create-family',
@@ -12,10 +15,13 @@ export class CreateFamilyComponent implements OnInit {
 
   @Input() data:any
   @Output() cancel: EventEmitter<boolean>;
+
+  destroy: Subject<boolean> = new Subject<boolean>();
   form:FormGroup
   head:any;
   constructor(
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    private familyService:FamilyService
   ) { 
     this.form=new FormGroup({
       head: new FormControl(''),
@@ -58,6 +64,7 @@ export class CreateFamilyComponent implements OnInit {
           localStorage.setItem("page", 'family')
           localStorage.setItem('state',JSON.stringify(this.selectHeadFlag))
         }
+        
   }
 
   onCancel(){
@@ -77,6 +84,24 @@ export class CreateFamilyComponent implements OnInit {
     this.form.patchValue({
       family_name: this.head.area+"/"+this.head.last_name
     })
+  }
+
+  onheadSelect(data){
+    this.familyService.selectHead({
+      family:this.data,
+      head:this.head
+    }).pipe(takeUntil(this.destroy)).subscribe((data:any)=>{
+        this.selectHeadFlag=false
+        this.form.patchValue({
+          family_name: this.head.area+"/"+this.head.last_name
+       })
+    })
+    
+  }
+
+  ngOnDestroy() {
+    this.destroy.next(true);
+    this.destroy.unsubscribe();
   }
 
 }

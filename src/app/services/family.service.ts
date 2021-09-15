@@ -49,7 +49,15 @@ export class FamilyService {
     return this.http.get(`${environment.apiUrl}/api/member/list`, params);
   }
   
-  postFamily(data:any) {
+  createFamily(data:any) {
+    return this.http.post(`${environment.apiUrl}/api/family/create`, data, {});
+  }
+
+  selectHead(data:any) {
+    return this.http.post(`${environment.apiUrl}/api/family/selectHead`, data, {});
+  }
+
+  setRalationship(data:any) {
     return this.http.post(`${environment.apiUrl}/api/family`, data, {});
   }
 
