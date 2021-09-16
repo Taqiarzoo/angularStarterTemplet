@@ -1,0 +1,56 @@
+<div class=".container">
+    <div class="row">
+        <div class="col">
+            <div class="card" >
+                
+                <div class="card-body">
+                    <h5 class="card-title">Family List</h5>
+                    <hr>
+                    <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">Family Name/No</th>
+                            <th scope="col">HEAD NAME</th>
+                            <th scope="col">Members</th>
+                            <th scope="col"> GALI</th>
+                            <th scope="col"> AREA</th>
+                            <th scope="col"> CITY</th>
+                            <th scope="col">HEAD</th>
+                          </tr>
+                        </thead>
+                        <tbody >
+                            <tr *ngFor="let data of data let j=index"  #ref >
+                                    <td>{{data?.family_name?data?.family_name:data?.family_no}}</td>
+                                    <td>{{data['head.first_name']+ ' '+data['head.middle_name']+ ' '+data['head.last_name']}}</td>
+                                    <td>{{data?.No_of_members}}</td>
+                                    <td>{{data['head.address.area.name'] || 'N/A'}}</td>
+                                    <td>{{data['head.address.area.galiMohalla.name'] || 'N/A'}}</td>
+                                    <td>{{data['head.address.city.name'] || 'N/A'}}</td>
+                                    
+                                <td>
+                                        <!-- <select *ngIf="data.id!=head.id" id="address_type" (change)="onSelectRelation(data.id,$event)" formControlName="relation" class="form-select"
+                                        [compareWith]="compareFn" >
+                                        <option selected>Select Relation...</option>
+                                             <option *ngFor="let relation of relations" [value]="relation.id">{{relation.name}}</option> 
+                                    </select>
+                                    <span *ngIf="data.id==head.id">Head</span> -->
+                               
+                                </td>
+                             
+        
+                              </tr>
+                        </tbody>
+                    </table>
+                        
+                </div>
+                <div class="card-footer text-end">
+                    <!-- <button type="button" class="btn btn-primary text-end" (click)="onReturn()">cancel</button>
+                    <button type="button" class="btn btn-primary text-end" (click)="onSave(data)">Save Family</button> -->
+                    
+                    <button type="button" class="btn btn-primary text-end" style="margin-right: 10px;" >Save Family</button>
+                    <button type="button" class="btn btn-primary text-end " >cancel</button>
+                </div>
+              </div>
+        </div>
+    </div>
+ </div>

@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateFamilyComponent } from './member/create-family/create-family.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import { FamilyComponent } from './family/family.component';
 
 
 
@@ -33,14 +34,13 @@ const routes: Routes = [
           title:'Members Add'
         }
       },
-      // {
-      //   path: 'family',
-      //   component: CreateFamilyComponent,
-      //   data:{
-      //     title:'Members Add'
-      //   }
-      // }
-    
+      {
+        path: 'family',
+        component: FamilyComponent,
+        data:{
+          title:'Family'
+        }
+      }
     ]
     }
   ]
@@ -50,6 +50,7 @@ const routes: Routes = [
     MemberComponent,
     CreateComponent,
     CreateFamilyComponent,
+    FamilyComponent,
     
   ],
   imports: [

@@ -12,11 +12,11 @@ export class AppComponent {
   version = 'Angular version 12.1.3';
   items = [
     {
-      name: 'Family', link: 'family',
+      name: 'Family', link: 'member', queryParams:{},
       elements: [
-        { name: 'Family', link: 'family' },
-        { name: 'Head Assign', link: 'family' },
-        { name: 'Relation Assign', link: 'family' },
+        { name: 'Family', link: 'member/family',queryParams:{is_head_assign:null,is_relation_define:null}  },
+        { name: 'Head Assign', link: 'member/family',queryParams:{is_head_assign:true,is_relation_define:false} },
+        { name: 'Relation Assign', link: 'member/family',queryParams:{is_head_assign:true,is_relation_define:true} },
         // { name: 'breadcrumb', link: 'bootstrap/breadcrumb' },
         // { name: 'buttons', link: 'bootstrap/buttons' },
         // { name: 'collapse', link: 'bootstrap/collapse' },
@@ -31,25 +31,25 @@ export class AppComponent {
       ]
     },
     {
-      name: 'Features', link: 'Features',
+      name: 'Features', link: 'Features',queryParams:{},
       elements: [
-        { name: 'httpclient', link: 'httpclient' },
-        { name: 'template-driven-forms', link: 'template-driven-forms' },
-        { name: 'components', link: 'components' },
-        { name: 'services', link: 'services' }
+        { name: 'httpclient', link: 'httpclient' ,queryParams:{}},
+        { name: 'template-driven-forms', link: 'template-driven-forms',queryParams:{} },
+        { name: 'components', link: 'components',queryParams:{} },
+        { name: 'services', link: 'services',queryParams:{} }
       ]
     },
     {
-      name: 'Reactive Form', link: 'reactive-form',
+      name: 'Reactive Form', link: 'reactive-form',queryParams:{},
       elements: [
-        { name: 'prototype', link: 'reactive-form/prototype' },
+        { name: 'prototype', link: 'reactive-form/prototype' ,queryParams:{}},
         { name: 'form-control', link: 'reactive-form/form-control' },
-        { name: 'form-control-class', link: 'reactive-form/form-control-class' },
-        { name: 'form-group', link: 'reactive-form/form-group' },
-        { name: 'form-builder', link: 'reactive-form/form-builder' },
-        { name: 'form-builder-nested', link: 'reactive-form/form-builder-nested' },
-        { name: 'form-array', link: 'reactive-form/form-array' },
-        { name: 'form-multi', link: 'reactive-form/form-multi' },
+        { name: 'form-control-class', link: 'reactive-form/form-control-class',queryParams:{} },
+        { name: 'form-group', link: 'reactive-form/form-group',queryParams:{} },
+        { name: 'form-builder', link: 'reactive-form/form-builder',queryParams:{} },
+        { name: 'form-builder-nested', link: 'reactive-form/form-builder-nested',queryParams:{} },
+        { name: 'form-array', link: 'reactive-form/form-array',queryParams:{} },
+        { name: 'form-multi', link: 'reactive-form/form-multi',queryParams:{} },
       ]
     },
   ];
@@ -58,7 +58,7 @@ export class AppComponent {
     public router: Router,
     public renderer: Renderer2) { }
 
-  onSelectMenu(link: any): void {
+  onSelectMenu(link: any,queryParams?:any): void {
 
     const element = document.getElementById('bd-docs-nav');
     this.renderer.removeClass(element, 'show');
@@ -70,14 +70,15 @@ export class AppComponent {
     }
     else if(link=='NotAttached'){
       this.router.navigate(['/'],{queryParams: {
-        is_assign_family: false
+        is_assign_family: false,
+        is_head:true
       }});
     }else if(link=='Attached'){
-      this.router.navigate(['/'],{queryParams: {
+      this.router.navigate(['member/family'],{queryParams: {
         is_assign_family: true
       }});
     }else{
-      this.router.navigate([route]);
+      this.router.navigate([route],{queryParams});
     }
     
   }

@@ -89,7 +89,7 @@
           </a>
           <div class="collapse" id="{{ item.link }}-collapse">
             <ul class="list-unstyled fw-normal pb-1 small">
-              <li *ngFor="let element of item.elements"><a (click)="onSelectMenu(element.link)" class="d-inline-flex align-items-center rounded"
+              <li *ngFor="let element of item.elements"><a (click)="onSelectMenu(element.link,element.queryParams)" class="d-inline-flex align-items-center rounded"
                   aria-current="page">
                   {{ element.name }}</a></li>
             </ul>
