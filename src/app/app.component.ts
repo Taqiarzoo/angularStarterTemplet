@@ -12,22 +12,22 @@ export class AppComponent {
   version = 'Angular version 12.1.3';
   items = [
     {
-      name: 'bootstrap', link: 'bootstrap',
+      name: 'Family', link: 'family',
       elements: [
-        { name: 'alerts', link: 'bootstrap/alerts' },
-        { name: 'badge', link: 'bootstrap/badge' },
-        { name: 'blockquotes', link: 'bootstrap/blockquotes' },
-        { name: 'breadcrumb', link: 'bootstrap/breadcrumb' },
-        { name: 'buttons', link: 'bootstrap/buttons' },
-        { name: 'collapse', link: 'bootstrap/collapse' },
-        { name: 'dropdowns', link: 'bootstrap/dropdowns' },
-        { name: 'forms', link: 'bootstrap/forms' },
-        { name: 'list-group', link: 'bootstrap/list-group' },
-        { name: 'modal', link: 'bootstrap/modal' },
-        { name: 'pagination', link: 'bootstrap/pagination' },
-        { name: 'popovers', link: 'bootstrap/popovers' },
-        { name: 'progress', link: 'bootstrap/progress' },
-        { name: 'spinners', link: 'bootstrap/spinners' },
+        { name: 'Family', link: 'family' },
+        { name: 'Head Assign', link: 'family' },
+        { name: 'Relation Assign', link: 'family' },
+        // { name: 'breadcrumb', link: 'bootstrap/breadcrumb' },
+        // { name: 'buttons', link: 'bootstrap/buttons' },
+        // { name: 'collapse', link: 'bootstrap/collapse' },
+        // { name: 'dropdowns', link: 'bootstrap/dropdowns' },
+        // { name: 'forms', link: 'bootstrap/forms' },
+        // { name: 'list-group', link: 'bootstrap/list-group' },
+        // { name: 'modal', link: 'bootstrap/modal' },
+        // { name: 'pagination', link: 'bootstrap/pagination' },
+        // { name: 'popovers', link: 'bootstrap/popovers' },
+        // { name: 'progress', link: 'bootstrap/progress' },
+        // { name: 'spinners', link: 'bootstrap/spinners' },
       ]
     },
     {

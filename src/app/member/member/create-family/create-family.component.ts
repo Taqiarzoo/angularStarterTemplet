@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FamilyService } from 'src/app/services/family.service';
+import { MasterService } from 'src/app/services/master.service';
 
 @Component({
   selector: 'app-create-family',
@@ -15,22 +16,31 @@ export class CreateFamilyComponent implements OnInit {
 
   @Input() data:any
   @Output() cancel: EventEmitter<boolean>;
+  relations:any[]=[];
 
   destroy: Subject<boolean> = new Subject<boolean>();
   form:FormGroup
   head:any;
+  selected_relation:any[]=[]
   constructor(
     private fb:FormBuilder,
-    private familyService:FamilyService
+    private familyService:FamilyService,
+    private masterService:MasterService
   ) { 
     this.form=new FormGroup({
       head: new FormControl(''),
       family_name: new FormControl(''),
-      relation: fb.array([]),
+      relation: new FormControl(''),
     })
     this.cancel = new EventEmitter<boolean>();
     console.log("Family Component")
     console.log(this.data)
+    this.masterService.getRelations().pipe(takeUntil(this.destroy)).subscribe((data:any)=>{
+      if(data.status==1){
+        this.relations=data.relations
+      }
+    })
+
   }
 
 
@@ -73,6 +83,7 @@ export class CreateFamilyComponent implements OnInit {
 
   onReturn(){
     this.selectHeadFlag=true
+    localStorage.setItem('state',JSON.stringify(this.selectHeadFlag))
   }
 
   compareFn(o1, o2) {
@@ -80,23 +91,43 @@ export class CreateFamilyComponent implements OnInit {
   }
 
   onSave(data){
-    this.selectHeadFlag=false
-    this.form.patchValue({
-      family_name: this.head.area+"/"+this.head.last_name
+    this.familyService.setRalationship({
+      family:this.selected_relation,
+      head:this.head,
+      family_name:this.form.get('family_name').value
+    }).pipe(takeUntil(this.destroy)).subscribe((data:any)=>{
+      
     })
   }
 
   onheadSelect(data){
     this.familyService.selectHead({
       family:this.data,
-      head:this.head
+      head:this.head,
+      area:{
+        areaId:this.head.address[0].area.id,
+        area:this.head.address[0].area.name
+      }
     }).pipe(takeUntil(this.destroy)).subscribe((data:any)=>{
-        this.selectHeadFlag=false
-        this.form.patchValue({
-          family_name: this.head.area+"/"+this.head.last_name
-       })
+       if(data.status==1){
+            this.selectHeadFlag=false
+            localStorage.setItem('state',JSON.stringify(this.selectHeadFlag))
+            this.form.patchValue({
+              family_name: data.family_name
+          })
+       }
     })
     
+  }
+
+  onSelectRelation(memberId,event){
+    console.log(memberId,event.target.value)
+    this.selected_relation.push(
+      {
+        memberId:memberId,
+        relationId:event.target.value
+      }
+    )
   }
 
   ngOnDestroy() {

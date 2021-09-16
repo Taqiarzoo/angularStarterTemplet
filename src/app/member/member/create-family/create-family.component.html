@@ -38,15 +38,15 @@
                 <tbody>
                     <tr *ngFor="let data of data let j=index" #ref>
                         <th scope="row">{{j}}</th>
+                        <td>{{data.member_no}}</td>
                         <td>{{data.first_name}}</td>
                         <td>{{data.middle_name}}</td>
                         <td>{{data.last_name}}</td>
                         <td>{{data.relative}}</td>
-                        <td>{{data.house_no}}</td>
-                        <td>{{data.gali_mohalla}}</td>
-                        <td>{{data.house_no}}</td>
-                        <td>{{data.area}}</td>
-                        <td>{{data.city}}</td>
+                        <td>{{data?.address[0]?.house_no}}</td>
+                        <td>{{data?.address[0]?.area?.galiMohalla[0]?.name}}</td>
+                        <td>{{data?.address[0]?.area?.name}}</td>
+                        <td>{{data?.address[0]?.city?.name}}</td>
                         <td>
                             <div class="custom-control custom-radio">
                                 <input type="radio" id="customRadio1" value="head" name="head"  (change)="selectHead(data,j,$event,ref)" class="custom-control-input">
@@ -86,48 +86,33 @@
                     <th scope="col">S. NO</th>
                     <th scope="col">MEMBER NO</th>
                     <th scope="col">FIRST NAME</th>
+                    <th scope="col"> MIDDLE NAME</th>
                     <th scope="col">LAST NAME </th>
-                    <th scope="col">
-                        MIDDLE NAME
-                    </th>
-                    <th scope="col">
-                        FATHER/HUSBAND NAME
-                    </th>
-                    <th scope="col">
-                        HOUSE NO
-                    </th>
-                    <th scope="col">
-                        GALI
-                    </th>
-                    <th scope="col">
-                        AREA
-                    </th>
-                    <th scope="col">
-                        CITY
-                    </th>
-                    <th scope="col">
-                        HEAD
-                    </th>
+                    <th scope="col">FATHER/HUSBAND NAME</th>
+                    <th scope="col">HOUSE NO</th>
+                    <th scope="col"> GALI</th>
+                    <th scope="col"> AREA</th>
+                    <th scope="col"> CITY</th>
+                    <th scope="col">HEAD</th>
                   </tr>
                 </thead>
-                <tbody formArrayName="realtion">
-                    <tr *ngFor="let data of data let j=index" [formGroupName]="j" #ref >
+                <tbody >
+                    <tr *ngFor="let data of data let j=index"  #ref >
                         <th scope="row">{{j}}</th>
+                        <td>{{data.member_no}}</td>
                         <td>{{data.first_name}}</td>
-                        <td>{{data.middle_name}}</td>
                         <td>{{data.last_name}}</td>
+                        <td>{{data.middle_name}}</td>
                         <td>{{data.relative}}</td>
-                        <td>{{data.house_no}}</td>
-                        <td>{{data.gali_mohalla}}</td>
-                        <td>{{data.house_no}}</td>
-                        <td>{{data.area}}</td>
-                        <td>{{data.city}}</td>
+                        <td>{{data?.address[0]?.house_no}}</td>
+                        <td>{{data?.address[0]?.area?.galiMohalla[0]?.name}}</td>
+                        <td>{{data?.address[0]?.area?.name}}</td>
+                        <td>{{data?.address[0]?.city?.name}}</td>
                         <td>
-                           
-                                <select *ngIf="data.id!=head.id" id="address_type" formControlName="relation" class="form-select"
+                                <select *ngIf="data.id!=head.id" id="address_type" (change)="onSelectRelation(data.id,$event)" formControlName="relation" class="form-select"
                                 [compareWith]="compareFn" >
                                 <option selected>Select Relation...</option>
-                                <!-- <option *ngFor="let unit of weightOptions" [ngValue]="unit">{{unit.name}}</option> -->
+                                     <option *ngFor="let relation of relations" [value]="relation.id">{{relation.name}}</option> 
                             </select>
                             <span *ngIf="data.id==head.id">Head</span>
                        

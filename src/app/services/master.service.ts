@@ -89,6 +89,10 @@ export class MasterService {
   createGalliMohalla(data:any){
     return this.http.post(`${environment.apiUrl}/api/masters/galli_mohalla`,data,{})
   }
+
+  getRelations(){
+    return this.http.get(`${environment.apiUrl}/api/masters/relations`,{})
+  }
 }
 
 
