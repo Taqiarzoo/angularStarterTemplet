@@ -31,9 +31,9 @@ export class AppComponent {
       ]
     },
     {
-      name: 'Features', link: 'Features',queryParams:{},
+      name: 'Masters', link: 'masters',queryParams:{},
       elements: [
-        { name: 'httpclient', link: 'httpclient' ,queryParams:{}},
+        { name: 'masters', link: 'masters/area' ,queryParams:{}},
         { name: 'template-driven-forms', link: 'template-driven-forms',queryParams:{} },
         { name: 'components', link: 'components',queryParams:{} },
         { name: 'services', link: 'services',queryParams:{} }

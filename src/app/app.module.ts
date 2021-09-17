@@ -12,6 +12,10 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { CommonModule } from '@angular/common';
+import { HeadSelectComponent } from './models/head-select/head-select.component';
+import { GeneralAtertComponent } from './models/general-atert/general-atert.component';
+import { ErrorAtertComponent } from './models/error-atert/error-atert.component';
+import { FamilyinfoComponent } from './models/familyinfo/familyinfo.component';
 
 
 @NgModule({
@@ -19,6 +23,11 @@ import { CommonModule } from '@angular/common';
     AppComponent,
     HomeComponent,
     NotFoundComponent,
+ 
+    HeadSelectComponent,
+    GeneralAtertComponent,
+    ErrorAtertComponent,
+    FamilyinfoComponent,
   ],
   imports: [
     BrowserModule,

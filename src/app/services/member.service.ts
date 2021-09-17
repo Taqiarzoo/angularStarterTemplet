@@ -43,7 +43,7 @@ getMembers(query:any, page:any, limit:any, orderBy:any, orderDir:any,filter:any)
     params=params.append('areaId',filter.currentAreaId)
   }
   if(filter?.currentGaliMohallaId){
-    params=params.append('galimohallaId',filter.currentGaliMohallaId)
+    params=params.append('id',filter.currentGaliMohallaId)
   }
   if(filter?.currentLast_name){
     params=params.append('last_name',filter.currentLast_name)

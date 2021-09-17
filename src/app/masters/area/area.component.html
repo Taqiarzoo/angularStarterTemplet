@@ -1,16 +1,39 @@
 <div class=".container">
- 
- 
     <div class="row">
         <div class="col">
-            <div class="card" style="width: 18rem;">
+            <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
-                </div>
+                  <div class="row">
+                    <div class="col-md-4" [formGroup]="form">
+                            <label for="country" class="form-label">Country</label>
+                            <select id="country" (change)="onCountrySelect($event)" formControlName="country" class="form-select"
+                            [compareWith]="compareFn" >
+                            <option selected>Choose...</option>
+                            <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4" [formGroup]="form">
+                            <label for="state" class="form-label">state</label>
+                            <select id="state" (change)="onStateSelect($event)" formControlName="state" class="form-select"
+                            [compareWith]="compareFn" >
+                            <option selected>Choose...</option>
+                            <option *ngFor="let state of states" [value]="state.id">{{state.name}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4" [formGroup]="form">
+                            <label for="city" class="form-label">City</label>
+                            <select id="city" (change)="onCitySelect($event)" formControlName="city" class="form-select"
+                            [compareWith]="compareFn" >
+                              <option selected>Choose...</option>
+                              <option *ngFor="let city of cities" [value]="city.id">{{city.name}}</option>
+                            </select>
+                        </div>
+                          
+                  </div>
+                  <ng2-smart-table [settings]="settings" [source]='areas'  (createConfirm)="OnCreate($event)"></ng2-smart-table>
+                  </div>
+                  
               </div>
         </div>
     </div>

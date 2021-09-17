@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AreaComponent } from './area/area.component';
 import { RouterModule, Routes } from '@angular/router';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -38,6 +39,8 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
     Ng2SmartTableModule
   ]
